@@ -11,8 +11,6 @@
   <script src="https://unpkg.com/vue"></script>
 </head>
 <body>
-  <!-- wont work -->
-  {{ name }}
   
   <!-- our template -->
   <section id="app" class="section container">
@@ -22,20 +20,13 @@
       Email: {{ email }}
     </p>
 
-    <a class="celebrate" v-on:click="celebrate">Do the Celebration!</a>
+    <a class="button is-info" v-on:click="celebrate">
+      Do the Celebration!
+    </a>
   </section>
 
   <!-- our javascript -->
   <script>
-    // plain javascript ========================================================
-    // // just doing the click button
-    // const celebrateButton = document.querySelector('.celebrate');
-    // celebrateButton.addEventListener('click', celebrate);
-    // function celebrate() {
-    //   alert('Celebrating!');
-    // }
-
-    // vue =====================================================================
     var app = new Vue({
       el: '#app',
       data: {
@@ -45,11 +36,10 @@
       },
       methods: {
         celebrate: function() {
-          console.log(this.name);
-          alert(`${this.name} is CELEBRATING!`);
+          alert(`${this.name} is celebrating!`);
         }
       }
-    })
+    });
   </script>
 </body>
 </html>
