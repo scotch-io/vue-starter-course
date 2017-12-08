@@ -13,19 +13,20 @@
 <body>
   <!-- our template -->
   <section id="app" class="section container">
-    <h1 class="title">{{ title }}</h1>
-    
-    <div v-if="avatar">
-      <img v-bind:src="avatar" width="300" height="300">
-      <img :src="avatar" width="300" height="300">
+    <!-- text interpolation -->
+    {{ avatar }}
+
+    <!-- binding to attributes -->
+    <img height="300" width="300" v-bind:src="avatar">
+    <img height="300" width="300" :src="avatar">
+
+    <div class="notification is-success" v-if="isSuccess">
+      we did it! successful!
     </div>
 
-    <button 
-      type="button" 
-      class="button is-primary" 
-      v-bind:disabled="!readyToSubmit">
-        Submit!
-    </button>
+    <div class="notification is-danger" v-if="!isSuccess">
+      we did not do it. not successful
+    </div>
   </section>
 
   <!-- our javascript -->
@@ -33,9 +34,8 @@
     const app = new Vue({
       el: '#app',
       data: {
-        title: 'My Main Title!',
-        avatar: null,
-        readyToSubmit: false
+        avatar: 'https://pbs.twimg.com/profile_images/850147482117865472/O28qQSrN_400x400.jpg',
+        isSuccess: true
       }
     });
   </script>
