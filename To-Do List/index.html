@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue Test!</title>
+
+  <!-- css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.css">
+  <style>
+    #app        {
+      width: 500px;
+      margin: 0 auto;
+    }
+    #app .todo  {
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+
+  <!-- js -->
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+
+  <!-- hero section ====================== -->
+  <section class="hero is-info is-small is-bold">
+  <div class="hero-body has-text-centered">
+    <h1 class="title">My To-Dos</h1>
+  </div>
+  </section>
+
+  <!-- where our application will go =================== -->
+  <section id="app" class="section">
+
+    <div class="box">
+      <input 
+        type="text" 
+        class="input" 
+        placeholder="What are you going to do?"
+        v-model="newTodoText" 
+        @keyup.enter="addTodo">
+    </div>
+
+    <ul>
+      <li
+        class="box todo"  
+        is="todo-item"
+        v-for="(todo, index) in todos" 
+        v-if="!todo.done"  
+        :key="index"
+        :todo="todo"
+        @mark-done="markTodoDone">
+      </li>
+    </ul>
+
+  </section>
+
+  <!-- create our vue app =========================== -->
+  <script>
+    Vue.component('todo-item', {
+      props: ['todo'],
+      template: `
+        <li class="box todo">
+          {{ todo.text }}
+          <a v-on:click="$emit('mark-done')">Mark Done</a>
+        </li>
+      `
+    });
+
+    const app = new Vue({
+      el: '#app',
+      data: {
+        newTodoText: '',
+        todos: [
+          { text: 'do something', done: false },
+          { text: 'do other', done: false },
+          { text: 'one more', done: false },
+        ]
+      },
+      methods: {
+        markTodoDone: function(index) {
+          this.todos.splice(index, 1);
+        },
+        addTodo: function() {
+          this.todos.push({ text: this.newTodoText, done: false });
+          this.newTodoText = '';
+        }
+      }
+    }); 
+  </script>
+</body>
+</html>

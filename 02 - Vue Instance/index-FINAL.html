@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue Basics</title>
+
+  <!-- css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.css">
+
+  <!-- js -->
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  <!-- wont work -->
+  {{ name }}
+  
+  <!-- our template -->
+  <section id="app" class="section container">
+    <p>
+      Name: {{ name }}<br>
+      Username: {{ username }}<br>
+      Email: {{ email }}
+    </p>
+
+    <a class="celebrate" v-on:click="celebrate">Do the Celebration!</a>
+  </section>
+
+  <!-- our javascript -->
+  <script>
+    // plain javascript ========================================================
+    // // just doing the click button
+    // const celebrateButton = document.querySelector('.celebrate');
+    // celebrateButton.addEventListener('click', celebrate);
+    // function celebrate() {
+    //   alert('Celebrating!');
+    // }
+
+    // vue =====================================================================
+    var app = new Vue({
+      el: '#app',
+      data: {
+        name:     'Chris Sevilleja',
+        username: 'chrisoncode',
+        email:    'chris@scotch.io'
+      },
+      methods: {
+        celebrate: function() {
+          console.log(this.name);
+          alert(`${this.name} is CELEBRATING!`);
+        }
+      }
+    })
+  </script>
+</body>
+</html>

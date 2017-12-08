@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Learning Vue Like a Boss!</title>
+
+  <!-- css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.css">
+  <style>
+    .box  {
+      max-width: 200px;
+    }
+
+    .is-crazy {
+      position: absolute;
+      transition: 0.3s ease all;
+    }
+  </style>
+
+  <!-- js -->
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  <!-- our template -->
+  <section id="app" class="section container">
+
+    <!-- counter -->
+    <h1 class="title">Counter</h1>
+    <div class="box content has-text-centered">
+      <h2 class="title is-1">{{ count }}</h2>
+      <a class="button is-danger" :click="incrementCounter">Count</a>
+    </div>
+
+    <!-- crazy buttons -->
+    <a class="button is-info is-crazy" :style="buttonOffsets" @mouseenter="moveButton">Catch Me If You Can</a>
+  </section>
+
+  <!-- our javascript -->
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        count: 0,
+        buttonOffsets: {
+          top: 0,
+          bottom: 0
+        }
+      },
+      methods: {
+        incrementCounter: function() {
+          this.count += 1;
+        },
+        moveButton: function(e) {
+          this.buttonOffsets = {
+            top:  `${Math.random() * window.innerHeight}px`,
+            left: `${Math.random() * window.innerWidth}px`
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

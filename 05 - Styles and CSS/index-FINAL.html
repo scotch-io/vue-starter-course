@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Learning Vue Like a Boss!</title>
+
+  <!-- css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.css">
+
+  <!-- js -->
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  <!-- our template -->
+  <section id="app" class="section container">
+
+    <!-- Inline Classes ========================================= -->
+    <h2 class="title">Inline Classes</h2>
+    <div class="notification" v-bind:class="{ 'is-success': isSuccessful }">I am an notification!</div>
+
+    <!-- Object Classes ========================================= -->
+    <h2 class="title">Object Classes</h2>
+    <div class="notification" v-bind:class="notificationStyles">I am a notification!</div>
+
+    <!-- Array Classes ========================================= -->
+    <h2 class="title">Array Classes</h2>
+    <div class="field">
+      <div class="control">
+        <label class="radio">
+          <input type="radio" value="is-info" v-model="color"> Info
+        </label>
+        <label>
+          <input type="radio" value="is-danger" v-model="color"> Danger
+        </label>
+        <label>
+          <input type="radio" value="is-warning" v-model="color"> Warning
+        </label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <label class="radio">
+          <input type="radio" name="size" value="is-small" v-model="size"> Small
+        </label>
+        <label>
+          <input type="radio" name="size" value="is-medium" v-model="size"> Medium
+        </label>
+        <label>
+          <input type="radio" name="size" value="is-large" v-model="size"> Large
+        </label>
+      </div>
+    </div>
+    
+    <button 
+      class="button"
+      v-bind:class="[color, size]">
+        My Button
+    </button>
+
+    <!-- ================================================== -->
+    <hr>
+
+    <!-- Inline Styles ========================================= -->
+    <h2 class="title">Inline Styles</h2>
+    <div class="notification" v-bind:style="{ color: myColor, size: mySize }">I am an alert!</div>
+
+    <!-- Object Styles ========================================= -->
+    <h2 class="title">Object Styles</h2>
+    <article class="message" :style="messageStyles">
+      <div class="message-body">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla.
+      </div>
+    </article>
+
+  </section>
+
+  <!-- our javascript -->
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        // for classes ----------
+        isSuccessful: true,
+        notificationStyles: {
+          'is-info': true,
+          'is-size-2': true
+        },
+        color: '',
+        size: '',
+
+        // for styles -----------
+        myColor: '',
+        mySize: '',
+        messageStyles: {
+          background: '#EEE',
+          fontSize: '18px'
+        }
+      }
+    });
+  </script>
+</body>
+</html>
