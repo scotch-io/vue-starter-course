@@ -12,13 +12,12 @@
 </head>
 <body>
   <!-- our template -->
-  <section class="section container">
+  <section id="app" class="section container">
 
   </section>
 
   <!-- our javascript -->
-  <script>
-    // plain javascript ========================================================
+  <script>    
     const users = [
       {
         name: 'Chris',
@@ -37,9 +36,11 @@
       }
     ];
 
-    // vue =====================================================================
-    const app = new Vue({
+    // plain javascript ===========================
 
+    // vue =======================================================
+    const app = new Vue({
+      el: '#app'
     });
   </script>
 </body>
