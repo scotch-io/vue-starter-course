@@ -7,10 +7,6 @@
   <!-- css -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.css">
   <style>
-    .box  {
-      max-width: 200px;
-    }
-
     .is-crazy {
       position: absolute;
       transition: 0.3s ease all;
@@ -25,25 +21,44 @@
   <section id="app" class="section container">
 
     <!-- counter -->
-    <h1 class="title">Counter</h1>
+    <h1 class="title">Counter!</h1>
     <div class="box content has-text-centered">
       <h2 class="title is-1">{{ count }}</h2>
-      <a class="button is-danger" :click="incrementCounter">Count</a>
+      <!-- <a class="button is-danger" v-on:click="incrementCounter">Count Up</a> -->
+      <a class="button is-danger" @click.prevent="incrementCounter">Count Up</a>
     </div>
 
     <!-- crazy buttons -->
-    <a class="button is-info is-crazy" :style="buttonOffsets" @mouseenter="moveButton">Catch Me If You Can</a>
+    <a 
+      class="button is-info is-crazy" 
+      :style="buttonOffsets" 
+      @mouseenter="moveButton">
+        Catch me if you can!
+    </a>
   </section>
 
   <!-- our javascript -->
   <script>
+    // let count             = 0;
+    // const countPosition   = document.querySelector('h2.title');
+    // const incrementButton = document.querySelector('.button');
+
+    // countPosition.innerText = count;
+
+    // incrementButton.addEventListener('click', incrementCounter);
+    // function incrementCounter(e) {
+    //   e.preventDefault();
+    //   count += 1;
+    //   countPosition.innerText = count;
+    // }
+
     const app = new Vue({
       el: '#app',
       data: {
         count: 0,
         buttonOffsets: {
-          top: 0,
-          bottom: 0
+          top: null,
+          left: null
         }
       },
       methods: {
@@ -52,9 +67,9 @@
         },
         moveButton: function(e) {
           this.buttonOffsets = {
-            top:  `${Math.random() * window.innerHeight}px`,
+            top: `${Math.random() * window.innerHeight}px`,
             left: `${Math.random() * window.innerWidth}px`
-          }
+          };
         }
       }
     });
