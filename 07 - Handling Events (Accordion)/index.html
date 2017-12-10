@@ -12,9 +12,6 @@
       margin-left: auto;
       margin-right: auto;
     }
-    .message-header {
-      cursor: pointer;
-    }
     .message-body   {
       padding: 0;
       max-height: 10em;
@@ -36,41 +33,12 @@
   <!-- our template -->
   <section id="app" class="section container">
     
-    <!-- our message (accordion) -->
-    <article class="message" :class="accordionClasses">
-      <div class="message-header" @click="toggleAccordion">
-        <p>Hello World</p>
-      </div>
-      <div class="message-body">
-        <div class="message-content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. 
-        </div>
-      </div>
-    </article>
-
   </section>
 
   <!-- our javascript -->
   <script>
     const app = new Vue({
-      el: '#app',
-      data: {
-        isOpen: true
-      },
-      methods: {
-        toggleAccordion: function() {
-          this.isOpen = !this.isOpen;
-        }
-      },
-      computed: {
-        accordionClasses: function() {
-          return {
-            closed: !this.isOpen,
-            'is-primary': this.isOpen,
-            'is-dark': !this.isOpen
-          }
-        }
-      }
+      el: '#app'
     });
   </script>
 </body>
