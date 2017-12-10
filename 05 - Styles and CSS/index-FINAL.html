@@ -16,12 +16,18 @@
 
     <!-- Inline Classes ========================================= -->
     <h2 class="title">Inline Classes</h2>
-    <div class="notification" v-bind:class="{ 'is-success': isSuccessful }">I am an notification!</div>
+    <div class="notification" v-bind:class="{ 'is-success': isSuccessful, 'is-size-1': isLarge }">
+      I am a notification!
+    </div>
+
+    <a class="button is-info" v-on:click="celebrate">We did it!</a>
 
     <!-- Object Classes ========================================= -->
     <h2 class="title">Object Classes</h2>
-    <div class="notification" v-bind:class="notificationStyles">I am a notification!</div>
-
+    <div class="notification" v-bind:class="notificationStyles">
+      I am a notification!
+    </div>
+    
     <!-- Array Classes ========================================= -->
     <h2 class="title">Array Classes</h2>
     <div class="field">
@@ -29,10 +35,10 @@
         <label class="radio">
           <input type="radio" value="is-info" v-model="color"> Info
         </label>
-        <label>
+        <label class="radio">
           <input type="radio" value="is-danger" v-model="color"> Danger
         </label>
-        <label>
+        <label class="radio">
           <input type="radio" value="is-warning" v-model="color"> Warning
         </label>
       </div>
@@ -40,21 +46,19 @@
     <div class="field">
       <div class="control">
         <label class="radio">
-          <input type="radio" name="size" value="is-small" v-model="size"> Small
+          <input type="radio" value="is-small" v-model="size"> Small
         </label>
-        <label>
-          <input type="radio" name="size" value="is-medium" v-model="size"> Medium
+        <label class="radio">
+          <input type="radio" value="is-medium" v-model="size"> Medium
         </label>
-        <label>
-          <input type="radio" name="size" value="is-large" v-model="size"> Large
+        <label class="radio">
+          <input type="radio" value="is-large" v-model="size"> Large
         </label>
       </div>
     </div>
-    
-    <button 
-      class="button"
-      v-bind:class="[color, size]">
-        My Button
+
+    <button type="button" class="button" v-bind:class="[color, size]">
+      My Button      
     </button>
 
     <!-- ================================================== -->
@@ -62,15 +66,17 @@
 
     <!-- Inline Styles ========================================= -->
     <h2 class="title">Inline Styles</h2>
-    <div class="notification" v-bind:style="{ color: myColor, size: mySize }">I am an alert!</div>
+    <div class="notification" v-bind:style="{ color: myColor, fontSize: mySize, backgroundColor: myBgColor }">
+      I am a notification!
+    </div>
 
     <!-- Object Styles ========================================= -->
     <h2 class="title">Object Styles</h2>
-    <article class="message" :style="messageStyles">
-      <div class="message-body">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla.
+    <div class="message">
+      <div class="message-body" :style="myMessageStyles">
+        I am a notification!
       </div>
-    </article>
+    </div>
 
   </section>
 
@@ -79,21 +85,35 @@
     const app = new Vue({
       el: '#app',
       data: {
-        // for classes ----------
-        isSuccessful: true,
-        notificationStyles: {
-          'is-info': true,
-          'is-size-2': true
+        // inline classes
+        isSuccessful: false,
+        isLarge: false,
+
+        // object classes
+        notificationStyles: { 
+          'is-success': true, 
+          'is-size-1': true 
         },
+
+        // array classes
         color: '',
         size: '',
 
-        // for styles -----------
-        myColor: '',
-        mySize: '',
-        messageStyles: {
-          background: '#EEE',
-          fontSize: '18px'
+        // for styles
+        myColor: 'red',
+        mySize: '20px',
+        myBgColor: '#AAA',
+        
+        myMessageStyles: {
+          color: '#EEE',
+          fontSize: '20px',
+          backgroundColor: '#555',
+        }
+      },
+      methods: {
+        celebrate: function() {
+          this.isSuccessful = true;
+          this.isLarge      = true;
         }
       }
     });
