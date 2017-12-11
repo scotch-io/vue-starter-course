@@ -21,7 +21,7 @@
       overflow: hidden;
       transition: 0.3s ease all;
     }
-    .closed .message-body {
+    .is-closed .message-body {
       max-height: 0;
     }
     .message-content {
@@ -36,14 +36,13 @@
   <!-- our template -->
   <section id="app" class="section container">
     
-    <!-- our message (accordion) -->
     <article class="message" :class="accordionClasses">
       <div class="message-header" @click="toggleAccordion">
-        <p>Hello World</p>
+        Hello World        
       </div>
       <div class="message-body">
         <div class="message-content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. 
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>
         </div>
       </div>
     </article>
@@ -52,6 +51,17 @@
 
   <!-- our javascript -->
   <script>
+    // document.querySelector('.message-header')
+    //   .addEventListener('click', toggleAccordion);
+
+    // function toggleAccordion() {
+    //   document.querySelector('.message').classList.add('is-closed')
+    //   if (isOpen)
+    //     document.querySelector('.message').style.maxHeight = '0'
+    //   else
+    //     document.querySelector('.message').style.maxHeight = '10em'
+    // }
+
     const app = new Vue({
       el: '#app',
       data: {
@@ -65,10 +75,10 @@
       computed: {
         accordionClasses: function() {
           return {
-            closed: !this.isOpen,
+            'is-closed': !this.isOpen,
             'is-primary': this.isOpen,
             'is-dark': !this.isOpen
-          }
+          };
         }
       }
     });
