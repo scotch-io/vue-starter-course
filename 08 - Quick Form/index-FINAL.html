@@ -37,7 +37,16 @@
         <!-- email -->
         <div class="field">
           <label class="label">Email</label>
-          <input type="email" class="input" name="email" v-model="email">
+          <input 
+            type="email" 
+            class="input" 
+            name="email" 
+            v-model="email"
+            @blur="validateEmail">
+
+          <p class="help is-danger" v-if="errors.email">
+            Please enter a valid email.
+          </p>
         </div>
 
         <!-- submit button -->
@@ -76,15 +85,32 @@
       el: '#signup-form',
       data: {
         name: '',
-        email: ''
+        email: '',
+        errors: {
+          name: false,
+          email: false
+        }
       },
       methods: {
-        processForm: function () {
+        validateEmail: function() {
+          this.errors.email = !window.isValidEmail(this.email);
+        },
+        processForm: function() {
           console.log({ name: this.name, email: this.email });
           alert('Processing!');
         }
       }
     });
+
+    // helpers =================================================================
+    /**
+     * Validate emails
+     * Not 100% reliable. Just a quick and dirty check.
+     */
+    function isValidEmail(email) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    }
   </script>
 </body>
 </html>
