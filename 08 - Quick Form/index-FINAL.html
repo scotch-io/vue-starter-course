@@ -19,19 +19,22 @@
 </head>
 <body>
 
-  <!-- javascript -->
   <div class="hero is-fullheight is-info is-bold">
   <div class="hero-body">
   <div class="container">
     <h1 class="title has-text-centered">Vue.js Form Processing</h1>
     <div class="box">
 
-      <!-- our signup form ============================================== -->
+      <!-- our signup form ===================== -->
       <form id="signup-form" @submit.prevent="processForm">
         <!-- name -->
         <div class="field">
           <label class="label">Name</label>
-          <input type="text" class="input" name="name" v-model="name">
+          <input 
+            type="text"
+            class="input" 
+            name="name"
+            v-model="name">
         </div>
 
         <!-- email -->
@@ -51,7 +54,9 @@
 
         <!-- submit button -->
         <div class="field has-text-right">
-          <button type="submit" class="button is-danger">Submit</button>
+          <button type="submit" class="button is-danger">
+            Submit            
+          </button>
         </div>
       </form>
 
@@ -62,8 +67,8 @@
 
   <!-- our javascript -->
   <script>
-    // plain javscript =========================================================
-    // // get the things we need
+    // plain javscript ==================================
+    // grab the things we need
     // const signupForm = document.getElementById('signup-form');
     // const nameInput  = signupForm.querySelector('input[name=name]');
     // const emailInput = signupForm.querySelector('input[name=email]');
@@ -73,15 +78,15 @@
     // function processSignupForm(e) {
     //   e.preventDefault();
 
-    //   const name  = nameInput.value;
-    //   const email = emailInput.value; 
+    //   const name = nameInput.value;
+    //   const email = emailInput.value;
 
     //   console.log({ name, email });
     //   alert('Processing!');
     // }
 
-    // vue =====================================================================
-    const signupForm = new Vue({
+    // vue ==========================================
+    var app = new Vue({
       el: '#signup-form',
       data: {
         name: '',
@@ -92,17 +97,18 @@
         }
       },
       methods: {
-        validateEmail: function() {
-          this.errors.email = !window.isValidEmail(this.email);
-        },
         processForm: function() {
           console.log({ name: this.name, email: this.email });
-          alert('Processing!');
+          alert('Processing');
+        },
+        validateEmail: function() {
+          const isValid = window.isValidEmail(this.email);
+          this.errors.email = !isValid;
         }
       }
     });
 
-    // helpers =================================================================
+    // helpers ===============================================
     /**
      * Validate emails
      * Not 100% reliable. Just a quick and dirty check.
