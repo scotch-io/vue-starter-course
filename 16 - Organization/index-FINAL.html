@@ -28,8 +28,10 @@
   </style>
 
   <!-- js -->
-  <script src="https://unpkg.com/vue"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>  
+  <script src="https://unpkg.com/vue"></script>
+  <script src="./js/components/gif-box.js"></script>
+  <script src="./js/components/gif-grid.js"></script>
 </head>
 <body>
   <!-- our template -->
@@ -49,40 +51,6 @@
 
   <!-- our javascript -->
   <script>
-    const GifBox =  {
-      props: ['gif'],
-      template: `
-        <div class="gif-box">
-          <a :href="gif.url">
-            <img class="gif-image" :src="gif.images.original.url">
-          </a>
-          <a 
-            class="gif-user" 
-            v-if="gif.user" 
-            :href="gif.user.profile_url">
-              <img :src="gif.user.avatar_url" height="35" width="35">
-              {{ gif.user.display_name }}
-          </a>
-        </div>
-      `
-    };
-
-    const GifGrid = {
-      props: ['gifs'],
-      components: {
-        'gif-box': GifBox
-      },
-      template: `
-        <div class="columns is-multiline" v-if="gifs">
-          <div class="column is-one-third" v-for="gif in gifs">
-
-            <gif-box :gif="gif"></gif-box>
-
-          </div>
-        </div>
-      `
-    };
-
     const app = new Vue({
       el: '#app',
 
