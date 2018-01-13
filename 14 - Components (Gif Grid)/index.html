@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Learning Vue Like a Boss!</title>
+
+  <!-- css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.css">
+  <style>
+    input[name=query] {
+      margin-bottom: 30px;
+    }
+
+    .gif-box {
+      position: relative;
+      background: #333;
+    }
+    .gif-user   {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      left: 15px;
+      bottom: 15px;
+    }
+    .gif-user img {
+      margin-right: 8px;
+    }
+  </style>
+
+  <!-- js -->
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>  
+</head>
+<body>
+  <!-- our template -->
+  <section id="app" class="section container">    
+
+    <!-- SEARCH ========================================== -->
+    <h2 class="title">Search</h2>
+
+    <input type="text" class="input" name="query" v-model="query" @keyup="searchGifs">
+
+    <div class="columns is-multiline" v-if="searchedGifs">
+      <div class="column is-one-quarter" v-for="gif in searchedGifs">
+        <div class="gif-box">
+          <a :href="gif.url">
+            <img class="gif-image" :src="gif.images.original.url">
+          </a>
+          <a 
+            class="gif-user" 
+            v-if="gif.user" 
+            :href="gif.user.profile_url">
+              <img :src="gif.user.avatar_url" height="40" width="40">
+              {{ gif.user.display_name }}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRENDING ======================================= -->
+    <h2 class="title">Trending</h2>
+    <div class="columns is-multiline" v-if="trendingGifs">
+      <div class="column is-one-quarter" v-for="gif in trendingGifs">
+        <div class="gif-box">
+          <a :href="gif.url">
+            <img class="gif-image" :src="gif.images.original.url">
+          </a>
+          <a 
+            class="gif-user" 
+            v-if="gif.user" 
+            :href="gif.user.profile_url">
+              <img :src="gif.user.avatar_url" height="40" width="40">
+              {{ gif.user.display_name }}
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- our javascript -->
+  <script>
+    const app = new Vue({
+      el: '#app',
+
+      data: {
+        // test giphy api key
+        // if the usage limit has been hit, visit https://developers.giphy.com to get a new one
+        // 80bfcbf357864cd18518c324f47a7098
+        apiUrl: 'http://api.giphy.com/v1/gifs',
+        apiKey: '80bfcbf357864cd18518c324f47a7098',
+        searchedGifs: null,
+        trendingGifs: null,
+        query: ''
+      },
+
+      methods: {
+        fetchGifs: function() {
+          const url = `${this.apiUrl}/trending?api_key=${this.apiKey}&limit=8`;
+
+          fetch(url)
+            .then(response => response.json())
+            .then(data => this.trendingGifs = data.data);
+        },
+        searchGifs: function() {
+          const url = `${this.apiUrl}/search?api_key=${this.apiKey}&q=${this.query}&limit=8`;
+
+          fetch(url)
+            .then(response => response.json())
+            .then(data => this.searchedGifs = data.data);
+        }
+      },
+
+      created: function() {
+        this.fetchGifs();
+      }
+    });
+  </script>
+</body>
+</html>
