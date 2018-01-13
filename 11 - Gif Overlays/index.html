@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Learning Vue Like a Boss!</title>
+
+  <!-- css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.css">
+
+  <!-- js -->
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>  
+</head>
+<body>
+  <!-- our template -->
+  <section id="app" class="section container">
+    
+    <div v-if="gifs" v-for="gif in gifs">
+      <img :src="gif.images.original.url">
+    </div>
+
+  </section>
+
+  <!-- our javascript -->
+  <script>
+    const app = new Vue({
+      el: '#app',
+
+      data: {
+        // test giphy api key
+        // if the usage limit has been hit, visit https://developers.giphy.com to get a new one
+        // 80bfcbf357864cd18518c324f47a7098
+        apiUrl: 'http://api.giphy.com/v1/gifs',
+        apiKey: '80bfcbf357864cd18518c324f47a7098',
+        gifs: null
+      },
+
+      methods: {
+        fetchGifs: function() {
+          const url = `${this.apiUrl}/trending?api_key=${this.apiKey}`;
+
+          fetch(url)
+            .then(response => response.json())
+            .then(data => this.gifs = data.data);
+        }
+      },
+
+      created: function() {
+        this.fetchGifs();
+      }
+    });
+  </script>
+</body>
+</html>
