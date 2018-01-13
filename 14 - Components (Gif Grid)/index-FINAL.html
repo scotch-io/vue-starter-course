@@ -39,24 +39,11 @@
     <h2 class="title">Search</h2>
 
     <input type="text" class="input" name="query" v-model="query" @keyup="searchGifs">
-
-    <div class="columns is-multiline" v-if="searchedGifs">
-      <div class="column is-one-quarter" v-for="gif in searchedGifs">
-
-        <gif-box :gif="gif"></gif-box>
-
-      </div>
-    </div>
+    <gif-grid :gifs="searchedGifs"></gif-grid>
 
     <!-- TRENDING ======================================= -->
-    <h2 class="title">Trending</h2>
-    <div class="columns is-multiline" v-if="trendingGifs">
-      <div class="column is-one-quarter" v-for="gif in trendingGifs">
-
-        <gif-box :gif="gif"></gif-box>
-
-      </div>
-    </div>
+    <h2 class="title">Trending</h2>    
+    <gif-grid :gifs="trendingGifs"></gif-grid>
 
   </section>
 
@@ -80,6 +67,18 @@
       `
     });
 
+    Vue.component('gif-grid', {
+      props: ['gifs'],
+      template: `
+        <div class="columns is-multiline" v-if="gifs">
+          <div class="column is-one-third" v-for="gif in gifs">
+
+            <gif-box :gif="gif"></gif-box>
+
+          </div>
+        </div>
+      `
+    });
 
     const app = new Vue({
       el: '#app',
@@ -96,7 +95,7 @@
       },
 
       methods: {
-        fetchGifs: function() {
+        fetchTrendingGifs: function() {
           const url = `${this.apiUrl}/trending?api_key=${this.apiKey}&limit=8`;
 
           fetch(url)
@@ -113,7 +112,7 @@
       },
 
       created: function() {
-        this.fetchGifs();
+        this.fetchTrendingGifs();
       }
     });
   </script>
