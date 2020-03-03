@@ -27,13 +27,18 @@
     <!-- our javascript -->
     <script>
       // plain javascript ========================
-      const heading = document.querySelector("h1");
-      const input = document.querySelector("input");
+      // const heading = document.querySelector("h1");
+      // const input = document.querySelector("input");
 
-      // listen to the input box for
-      input.addEventListener("keyup", e => {
-        const text = e.target.value;
-        heading.innerText = text;
+      // // listen to the input box for
+      // input.addEventListener("keyup", e => {
+      //   const text = e.target.value;
+      //   heading.innerText = text;
+      // });
+
+      // jquery ===================================
+      $("input").on("keyup", e => {
+        $("h1").text(e.target.value);
       });
       // with vue ==============================
     </script>
