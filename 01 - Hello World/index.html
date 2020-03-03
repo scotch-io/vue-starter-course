@@ -16,13 +16,14 @@
   </head>
   <body>
     <!-- plain javascript -->
-    <section class="section container">
+    <!-- <section class="section container">
       <h1 class="title">My text goes here</h1>
       <input type="text" class="input" />
     </section>
+ -->
 
     <!-- vue -->
-    <section class="section container"></section>
+    <section id="app" class="section container"></section>
 
     <!-- our javascript -->
     <script>
@@ -37,10 +38,12 @@
       // });
 
       // jquery ===================================
-      $("input").on("keyup", e => {
-        $("h1").text(e.target.value);
-      });
+      //      $(".name-input").on("keyup", e => $("h1").text(e.target.value));
+
       // with vue ==============================
+      const app = new Vue({
+        el: "#app"
+      });
     </script>
   </body>
 </html>
