@@ -24,9 +24,12 @@
 
     <!-- vue -->
     <section id="app" class="section container">
-      <h1 class="title">{{ text }}</h1>
+      <h1 class="title">
+        Hi, my name is {{ name }} and my message is : {{ message }}
+      </h1>
 
-      <input type="text" class="input" v-model="text" />
+      <input type="text" class="input" v-model="name" />
+      <input type="text" class="input" v-model="message" />
     </section>
 
     <!-- our javascript -->
@@ -48,7 +51,8 @@
       const app = new Vue({
         el: "#app",
         data: {
-          text: "Hello World"
+          name: "chris",
+          message: "hello world"
         }
       });
     </script>
