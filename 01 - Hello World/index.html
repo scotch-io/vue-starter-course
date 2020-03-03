@@ -23,7 +23,9 @@
  -->
 
     <!-- vue -->
-    <section id="app" class="section container"></section>
+    <section id="app" class="section container">
+      <h1 class="title">{{ text }}</h1>
+    </section>
 
     <!-- our javascript -->
     <script>
@@ -42,7 +44,10 @@
 
       // with vue ==============================
       const app = new Vue({
-        el: "#app"
+        el: "#app",
+        data: {
+          text: "Hello World"
+        }
       });
     </script>
   </body>
