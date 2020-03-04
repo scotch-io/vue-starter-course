@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Vue Basics</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vue Basics</title>
 
-  <!-- css -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.css">
+    <!-- css -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.css"
+    />
 
-  <!-- js -->
-  <script src="https://unpkg.com/vue"></script>
-</head>
-<body>
-  
-  <!-- our template -->
-  <section class="section container">
+    <!-- js -->
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+    <!-- our template -->
+    <section id="app" class="section container"></section>
 
-  </section>
-
-  <!-- our javascript -->
-  <script>
-  </script>
-</body>
+    <!-- our javascript -->
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          name: "Chris Sevilleja",
+          username: "chrisoncode",
+          email: "chris@scotch.io"
+        }
+      });
+    </script>
+  </body>
 </html>
